@@ -13,10 +13,11 @@ export default {
         res => {
           localStorage.setItem("token", res.data.token);
           this.user.authenticated = true;
-          router.push("/projects");
+          
           var decoded = jwt_decode(res.data.token);
           store.dispatch("setUser", decoded);
           resolve(decoded);
+          window.location.reload();
         },
         err => {
           reject(err);
@@ -44,8 +45,6 @@ export default {
     localStorage.removeItem("token");
     this.user.authenticated = false;
     store.dispatch("setUser", {});
-
-    router.push("/");
     window.location.reload();
   }
 };

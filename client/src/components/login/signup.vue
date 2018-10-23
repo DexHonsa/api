@@ -1,35 +1,35 @@
 <template lang="html">
-  <div v-bind:class="{'overlay animated-fast fadeIn':visible,'overlay animated-fast fadeOut':!visible}" >
-    <div v-bind:class="{'modal-1 animated-fast zoomIn':visible,'modal-1 animated-fast zoomOut':!visible}" style="width: 400px">
+  <div class="overlay animated-fast animate-fix" :class="{'fadeIn':visible,'fadeOut':!visible}" >
+    <div class="modal-1 animated-fast animate-fix" :class="{'zoomIn':visible,'zoomOut':!visible}" style="width: 400px">
       <form class="login-form" @submit.prevent="submitForm">
       <div class="logo-container">
-        <img class="small-logo" src="../../img/brain.svg" alt="">
+        <img class="small-logo" src="../../img/logo_black.png" alt="">
       </div>
-      <img class="logo" src="../../img/logo_1.png" alt="">
+      <img class="logo" src="../../img/logo_black.png" alt="">
       <div class="login-panel-title">Signup For CommonBrain</div>
         <div class="login-box-input-item">
-          <div class="login-box-input-icon"><i class="fa fa-user-circle-o" /></div>
+          <div class="login-box-input-icon"><i class="fa fa-user-circle" /></div>
             <input v-validate="'required'" type="text" id="username" name="username" placeholder="Username" class="css-login-input-input" />
         </div>
-        <span v-show="errors.has('username')" class="help is-danger">{{ errors.first('username') }}</span>
+        <div v-show="errors.has('username')" class="help is-danger animated-fast fadeIn animate-fix">{{ errors.first('username') }}</div>
         <div class="login-box-input-item">
           <div class="login-box-input-icon"><i class="fa fa-envelope" /></div>
             <input v-validate="'required'" type="text" id="email" name="email" placeholder="Email" class="css-login-input-input" />
         </div>
-        <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+        <div v-show="errors.has('email')" class="help is-danger  animated-fast fadeIn animate-fix">{{ errors.first('email') }}</div>
         <div class="login-box-input-item">
           <div class="login-box-input-icon"><i class="fa fa-lock" /></div>
             <input v-validate="'required'" type="password" id="password" name="password" placeholder="Password" class="css-login-input-input" />
             
         </div>
-        <span v-show="errors.has('password')" class="help is-danger signup-error">{{ errors.first('password') }}</span>
+        <div v-show="errors.has('password')" class="help is-danger signup-error  animated-fast fadeIn animate-fix">{{ errors.first('password') }}</div>
     
     <div class="modal-btn-container">
         <div @click="toggleVisible" class="modal-btn cancel">Cancel</div>
     <button class="modal-btn confirm" type="submit"><span v-if="!isLoading">Signup</span> <img v-if="isLoading" style="width:25px" src="../../img/spinner_white.svg"/></button>
     
     </div>
-    <div v-if="hasError" class="alert-danger animated fadeIn" style="color:#ff0000; text-align:center; clear:both">{{errorMessage}}</div>
+    <div v-if="hasError" class="alert-danger animated fadeIn animate-fix" style="color:#ff0000; text-align:center; clear:both">{{errorMessage}}</div>
     
     </form>
     </div>
@@ -37,6 +37,7 @@
 </template>
 <script>
 import axios from "axios";
+import auth from "../../auth";
 
 export default {
   name: "signup_form",
@@ -81,8 +82,8 @@ export default {
         if (!this.errors.any()) {
           axios.post("/api/auth/signup", retrieved).then(
             res => {
-              // auth.login(retrieved);
-              console.log(res.data);
+              auth.login(retrieved);
+              // console.log(res.data);
             },
             err => {
               this.isLoading = false;
@@ -98,7 +99,7 @@ export default {
 };
 </script>
 <style>
-.signup-error{
-  margin-bottom:10px;
+.signup-error {
+  margin-bottom: 10px;
 }
 </style>

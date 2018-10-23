@@ -5,10 +5,8 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var router = express.Router();
 var userRoutes = require("./routes/users");
-var uploadRoutes = require("./routes/upload");
 var authRoutes = require("./routes/auth");
-var projectRoutes = require("./routes/projects");
-var fileRoutes = require("./routes/files");
+var professionalRoutes = require('./routes/professionals');
 var morgan = require("morgan");
 var nodemailer = require('nodemailer');
 var smtpTransport = require("nodemailer-smtp-transport");
@@ -26,11 +24,9 @@ app.use((req, res, next) => {
   next();
 });
 app.use("/api/users", userRoutes);
-app.use("/api/upload", uploadRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/projects", projectRoutes);
-app.use("/api/files", fileRoutes);
 app.use('/api/static', express.static(path.join(__dirname + '/uploads')));
+app.use('/api/professionals', professionalRoutes);
 
 app.post('/api/learnmore', (req,res,next)=>{
   var email = req.body.email;
@@ -140,7 +136,7 @@ app.use((error, req, res, next) => {
 
 
 mongoose.connect(
-  "mongodb://dexhonsa:Awesomeo21!@cluster0-shard-00-00-puscy.mongodb.net:27017,cluster0-shard-00-01-puscy.mongodb.net:27017,cluster0-shard-00-02-puscy.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin"
+  "mongodb://dexhonsa:Awesomeo21!@hid-shard-00-00-6vaxg.mongodb.net:27017,hid-shard-00-01-6vaxg.mongodb.net:27017,hid-shard-00-02-6vaxg.mongodb.net:27017/test?ssl=true&replicaSet=HID-shard-0&authSource=admin&retryWrites=true"
 );
 
 module.exports = app;

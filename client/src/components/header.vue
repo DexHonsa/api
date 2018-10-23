@@ -44,7 +44,7 @@ export default {
   height: 70px;
   width: 100%;
   text-align: center;
-  background: #66d0f7;
+  background: #323b41;
   position: relative;
   z-index: 10;
 }

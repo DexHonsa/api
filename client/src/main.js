@@ -10,9 +10,12 @@ import VueCroppie from "vue-croppie";
 import Loader from "vue-spinner/src/RingLoader.vue";
 import pusher from "vue-pusher";
 import VueMq from 'vue-mq';
+import './registerServiceWorker'
+
+Vue.config.productionTip = false
 
 require("./css/bootstrap.min.css");
-require("./css/font-awesome.min.css");
+// require("./css/font-awesome.min.css");
 require("./css/css.css");
 require("./css/animate.css");
 require("./css/tooltip.css");
@@ -60,10 +63,9 @@ Vue.directive("click-outside", {
 // Vue.options.mounted.pop();
 
 /* eslint-disable no-new */
+
 new Vue({
-  el: "#app",
   router,
   store,
-  components: { App },
-  template: "<App/>"
-});
+  render: h => h(App)
+}).$mount('#app')

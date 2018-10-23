@@ -21,8 +21,10 @@ export default {
   created() {
     const token = localStorage.getItem("token");
     if (token) {
+      console.log('hey')
       this.setToken(token);
     } else {
+      console.log('ho')
       this.$router.push("/");
     }
   },

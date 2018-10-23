@@ -12,24 +12,28 @@ Copyright (c) 2013 Daniel Eden
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+  
 }
 .animated-fast {
   -webkit-animation-duration: 0.2s;
   animation-duration: 0.2s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+  
 }
 .animated-med {
   -webkit-animation-duration: 0.5s;
   animation-duration: 0.5s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+  
 }
 .animated-slow {
   -webkit-animation-duration: 4s;
   animation-duration: 4s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+  
 }
 .animated-loader {
   -webkit-animation-duration: 1.3s;
@@ -3030,7 +3034,42 @@ Copyright (c) 2013 Daniel Eden
   -webkit-animation-name: rollOut;
   animation-name: rollOut;
 }
+@-webkit-keyframes zoomIn2 {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+  }
 
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn2 {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    transform: scale(0.7);
+  }
+
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    transform: scale(1.02);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.zoomIn2 {
+  -webkit-animation-name: zoomIn2;
+  animation-name: zoomIn2;
+}
 @-webkit-keyframes zoomIn {
   0% {
     opacity: 0;

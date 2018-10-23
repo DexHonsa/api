@@ -9,10 +9,11 @@ var jwt = require("jsonwebtoken");
 var config = require("../config");
 
 var URL =
-  "mongodb://dexhonsa:Awesomeo21!@cluster0-shard-00-00-puscy.mongodb.net:27017,cluster0-shard-00-01-puscy.mongodb.net:27017,cluster0-shard-00-02-puscy.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
+"mongodb://dexhonsa:Awesomeo21!@hid-shard-00-00-6vaxg.mongodb.net:27017,hid-shard-00-01-6vaxg.mongodb.net:27017,hid-shard-00-02-6vaxg.mongodb.net:27017/test?ssl=true&replicaSet=HID-shard-0&authSource=admin&retryWrites=true"
 
 router.post("/", (req, res, next) => {
   const { username, password } = req.body;
+  var lowercase = username.toLowerCase();
   var passwordHash = crypto
     .createHash("md5")
     .update(password)
@@ -20,10 +21,10 @@ router.post("/", (req, res, next) => {
   MongoClient.connect(URL, function(err, db) {
     if (err) throw err;
     var collection = db.collection("users");
-    collection.findOne({ username: username, password: passwordHash }).then(
+    collection.findOne({ username: lowercase, password: passwordHash }).then(
       result => {
         if (result != null) {
-          var token = jwt.sign({ id: result._id }, config.secret, {
+          var token = jwt.sign({ id: result._id, username: result.username, email: result.email }, config.secret, {
             expiresIn: 86400 // expires in 24 hours
           });
 
@@ -40,6 +41,16 @@ router.post("/", (req, res, next) => {
 });
 router.post("/signup", (req, res, next) => {
   const { username, password, email } = req.body;
+  lowerEmail = email.toLowerCase();
+  var lowercase = username.toLowerCase(); 
+  if(username.indexOf(' ') > -1){
+    res.status(401).send({error:'Usernames cannot have spaces'})
+    return;
+  }
+  if(password.length < 6){
+    res.status(401).send({error:'Passwords must have more than 6 characters'})
+    return;
+  }
   var passwordHash = crypto
     .createHash("md5")
     .update(password)
@@ -47,20 +58,28 @@ router.post("/signup", (req, res, next) => {
   MongoClient.connect(URL, function(err, db) {
     if (err) throw err;
     var collection = db.collection("users");
-    collection.findOne({ username: username }).then(result => {
+    collection.findOne({ username: lowercase }).then(result => {
       if (result == null) {
-        collection
-          .insert({
-            username: username,
-            password: passwordHash,
-            email: email
-          })
-          .then(result => {
-            res.send({
-              userId: result.ops[0]["_id"],
-              message: "Created Succesfully"
+        collection.findOne({ email: lowerEmail }).then(result => {
+          if (result == null) {
+            collection
+            .insert({
+              username: lowercase,
+              password: passwordHash,
+              email: lowerEmail
+            })
+            .then(result => {
+              res.send({
+                userId: result.ops[0]["_id"],
+                message: "Created Succesfully"
+              });
             });
-          });
+          } else {
+            res.status(401).send({ error: "Email Exists" });
+          }
+        })
+
+        
       } else {
         res.status(401).send({ error: "Username Exists" });
       }

@@ -33,20 +33,20 @@
             }
         </style>
         <linearGradient id="linear-gradient" x1="1280.15" y1="582.89" x2="1277.57" y2="318.4" gradientUnits="userSpaceOnUse">
-            <stop offset="0.09" stop-color="#35c0f4" />
-            <stop offset="0.99" stop-color="#66d0f7" />
+            <stop offset="0.09" stop-color="#3a4a50" />
+            <stop offset="0.99" stop-color="#242427" />
         </linearGradient>
         <linearGradient id="linear-gradient-2" x1="-11079.51" y1="571.29" x2="-11078.3" y2="0.39" gradientTransform="matrix(-1, 0, 0, 1, -9799.03, 0)" gradientUnits="userSpaceOnUse">
-            <stop offset="0.08" stop-color="#3db1dc" />
-            <stop offset="1" stop-color="#66d0f7" />
+            <stop offset="0.08" stop-color="#3a4a50" />
+            <stop offset="1" stop-color="#242427" />
         </linearGradient>
         <linearGradient id="linear-gradient-3" x1="1278.22" y1="581.79" x2="1287.07" y2="-7.17" gradientUnits="userSpaceOnUse">
-            <stop offset="0.08" stop-color="#35c0f4" />
-            <stop offset="1" stop-color="#fff" />
+            <stop offset="0.08" stop-color="#3a4a50" />
+            <stop offset="1" stop-color="#242427" />
         </linearGradient>
         <linearGradient id="linear-gradient-4" x1="1277.16" y1="541.86" x2="1241.72" y2="216.79" gradientUnits="userSpaceOnUse">
-            <stop offset="0.08" stop-color="#35c0f4" />
-            <stop offset="0.85" stop-color="#fff" />
+            <stop offset="0.08" stop-color="#242427" />
+            <stop offset="0.85" stop-color="#242427" />
         </linearGradient>
         <linearGradient id="linear-gradient-5" x1="-11166.68" y1="345.9" x2="-11417.02" y2="-291.09" xlink:href="#linear-gradient-2" />
     </defs>

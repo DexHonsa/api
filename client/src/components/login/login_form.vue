@@ -1,14 +1,14 @@
 <template lang="html">
-  <div v-bind:class="{'overlay animated-fast fadeIn':visible,'overlay animated-fast fadeOut':!visible}" >
-    <div v-bind:class="{'modal-1 animated-fast zoomIn':visible,'modal-1 animated-fast zoomOut':!visible}" style="width: 400px">
+  <div class="overlay animated-fast " :class="{'fadeIn':visible,'fadeOut':!visible}" >
+    <div class="modal-1 animated-fast " :class="{'zoomIn':visible,'zoomOut':!visible}" style="width: 400px">
       <form class="login-form" @submit.prevent="submitForm">
       <div class="logo-container">
-        <img class="small-logo" src="../../img/brain.svg" alt="">
+        <img class="small-logo" src="../../img/logo_black.png" alt="">
       </div>
-      <img class="logo" src="../../img/logo_1.png" alt="">
+      <img class="logo" src="../../img/logo_small_black.png" alt="">
       <div class="login-panel-title">Login To CommonBrain</div>
         <div class="login-box-input-item">
-          <div class="login-box-input-icon"><i class="fa fa-user-circle-o" /></div>
+          <div class="login-box-input-icon"><i class="fa fa-user-circle" /></div>
             <input type="text" id="username" name="username" placeholder="Username" class="css-login-input-input" />
         </div>
     <div class="login-box-input-item">
@@ -21,7 +21,7 @@
     <button class="modal-btn confirm" type="submit"><span v-if="!isLoading">Login</span> <img v-if="isLoading" style="width:25px" src="../../img/spinner_white.svg"/></button>
     
     </div>
-    <div v-if="hasError" class="alert-danger animated fadeIn" style="color:#ff0000; text-align:center; clear:both">{{errorMessage}}</div>
+    <div v-if="hasError" class="alert-danger animated fadeIn animate-fix" style="color:#ff0000; text-align:center; clear:both">{{errorMessage}}</div>
     <div class="forgot-password">Forgot Password?</div>
     </form>
     </div>
@@ -52,7 +52,7 @@ export default {
         that.hide();
       }, 300);
     },
-    submitForm() {
+    submitForm(event) {
       this.isLoading = true;
       var form = event.target;
       var data = new FormData(form);
